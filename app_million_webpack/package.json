@@ -1,0 +1,16 @@
+{
+  "name": "app_million_webpack",
+  "version": "0.0.1",
+  "description": "bla bla",
+  "main": "main/index.js",
+  "scripts": {
+    "test": "test",
+    "start": "webpack --watch --config dev.webpack.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "*",
+    "webpack-cli": "^3.3.11"
+  }
+}
