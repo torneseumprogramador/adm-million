@@ -21,41 +21,32 @@ const AdmController = {
     const adm = new Adm({ nome: req.body.nome, senha: req.body.senha, email: req.body.email });
     adm.save(error => {
       if(error){
-        res.send(error, 401);
+        res.status(401).send(error)
         return
       }
       
-      res.send({}, 201);
+      res.status(201).send({});
     });
   },
-  change: (req, res, next) => {
-    Adm.find({_id: req.params.adm_id}).then(dado => {
-      if(dado.length > 0){
-        adm = dado[0];
-        adm.nome = req.body.nome
-        adm.senha = req.body.senha
-        adm.email = req.body.email
-        adm.save(error => {
-          if(error){
-            res.send(error, 401);
-            return
-          }
-          
-          res.send(adm, 200);
-        });
-      }
-    });
-  },
-  delete: (req, res, next) => {
-    Adm.deleteMany({_id: req.params.adm_id}).then(data => {
-      if(data.deletedCount == 0){
-        res.send(data, 401);
-        return
-      }
-      
-      res.send({}, 204);
-    });
+  change: async(req, res, next) => {
+    console.log(req.params.adm_id)
+    try{
+    await Adm.findOneAndUpdate({_id: req.params.adm_id}, {nome: req.body.nome, senha: req.body.senha, email: req.body.email})
+    res.status(204).send(`Alterado com o id ${req.params.adm_id}`)
   }
-}
+  catch(err){
+    res.status(401).send(`Erro: ${err}`)
+  }
+},
+  delete: async(req, res, next) => {
+    try{
+      await Adm.findByIdAndDelete(req.params.adm_id)
+      res.status(204).send({});
 
+    }
+    catch(err){
+      res.status(401).send({})
+    }
+}
+}
 module.exports = AdmController;
