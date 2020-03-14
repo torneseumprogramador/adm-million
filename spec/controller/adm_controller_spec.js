@@ -18,6 +18,7 @@ describe("AdmController", () => {
     it("deve dados na API", async(done) => {
        const response = await axios.get(`${host}/adm.json`)
         const itens = response.data;
+        console.log(itens)
         expect(itens[0].nome).toBe("Danilo1");
         expect(itens[1].nome).toBe("Danilo2");
         done()
@@ -32,17 +33,12 @@ describe("AdmController", () => {
           nome,
           senha: '123456',
           email: nome + '@torneseumprogramador.com.br' 
-        },
-        const rsponse = await axios.post(`${host}/adm.json`)
-      // axios(options).then(response => {
-        // expect(response.statusCode).toBe(201);
-      // })
-      // .catch(function (err) {
-        // throw err.message
-      // });
-      // done();
-    // });
-  // });
+        }
+        const response = await axios.post(`${host}/adm.json`, body)
+        expect(response.status).toBe(201)
+      done();
+    });
+  });
 // 
   // describe("PUT /adm.json - administrador", () => {
     // it("deve alterar um administrador", (done) => {
