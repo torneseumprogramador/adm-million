@@ -7,11 +7,12 @@ describe("AdmController", () => {
   beforeEach(async()=>{
     await Adm.deleteMany()
     await Adm.create([{ nome: "Danilo1", senha: '123456', email: 'danilo1@torneseumprogramador.com.br' },{ nome: "Danilo2", senha: '123456', email: 'danilo2@torneseumprogramador.com.br' }])
-    })
+  })
+
   describe("GET /adm.json - deve retornar uma lista de administradores", () => {
     it("deve retornar o status code de 200", async(done) => {
-    const response = await axios.get(`${host}/adm.json`)
-    expect(response.status).toBe(200)
+      const response = await axios.get(`${host}/adm.json`)
+      expect(response.status).toBe(200)
       done();
     });
 
