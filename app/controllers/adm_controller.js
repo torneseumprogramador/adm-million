@@ -54,7 +54,7 @@ const AdmController = {
     }
   }
   else{
-    res.status.send({error: "Acesso negado a API"})
+    res.status(401).send({error: "Acesso negado a API"})
   }
   }
 }
